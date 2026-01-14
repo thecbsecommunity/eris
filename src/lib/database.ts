@@ -1,8 +1,8 @@
 import { Pool } from 'pg';
-import * as resourceMethods from './resourceMethods';
-import * as userMethods from './userMethods';
 import * as doubtMethods from './doubtMethods';
 import * as privateVCMethods from './privateVCMethods';
+import * as resourceMethods from './resourceMethods';
+import * as userMethods from './userMethods';
 
 export class DatabaseManager {
     private dbPool: Pool;
@@ -297,6 +297,10 @@ export class DatabaseManager {
 
     getPrivateVCByOwner(ownerID: string): Promise<string | null> {
         return privateVCMethods.getPrivateVCByOwner(this.dbPool, ownerID);
+    }
+
+    getAllPrivateVCs(): Promise<string[]> {
+        return privateVCMethods.getAllPrivateVCs(this.dbPool);
     }
 }
 

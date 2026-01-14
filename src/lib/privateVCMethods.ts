@@ -46,3 +46,10 @@ export async function getPrivateVCByOwner(db: Pool, ownerID: string): Promise<st
     }
     return rows[0].id;
 }
+
+export async function getAllPrivateVCs(db: Pool): Promise<string[]> {
+    const { rows } = await db.query(
+        "SELECT id FROM privatevc"
+    );
+    return rows.map(row => row.id);
+}
