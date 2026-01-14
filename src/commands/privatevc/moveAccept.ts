@@ -1,6 +1,6 @@
 import Eris from 'eris';
-import { Command } from '../../types/command';
 import { databaseManager } from '../../lib/database';
+import { Command } from '../../types/command';
 
 export default (bot: Eris.Client): Command => ({
     name: 'privatevc_move_accept',
@@ -83,6 +83,13 @@ export default (bot: Eris.Client): Command => ({
                     });
 
             await interaction.member?.edit({ channelID: privateVCId });
+
+            try {
+                const channel = bot.getChannel(privateVCId) as Eris.VoiceChannel;
+                await channel?.editPermission(userID, Eris.Constants.Permissions.connect | Eris.Constants.Permissions.speak, 0, Eris.Constants.PermissionOverwriteTypes.USER, 'Granting access to moved member');
+            } catch (error) {
+                console.log("Error editing permissions for moved member:", error);
+            }
 
         } catch (error) {
             console.log("Error moving member to private VC:", error);

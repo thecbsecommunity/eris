@@ -5,7 +5,7 @@
     "build": "tsc",
     "dev": "npm run clean && tsc && cross-env NODE_ENV=development node dist/index.js",
     "prod": "npm run clean && tsc && cross-env NODE_ENV=production node dist/index.js",
-    "clean": "del /s /q dist",
+    "clean": "rm -rf dist",
     "start": "npm run prod",
     "devNoClean": "tsc && cross-env NODE_ENV=development node dist/index.js",
     "prodNoClean": "tsc && cross-env NODE_ENV=production node dist/index.js"
